@@ -162,22 +162,18 @@ const findMyPies = (e) => {
     }
 };
 
-// how we'd do it if we were writing separate functions or each click event 
+const events = () => {
+    document.getElementById('Zoe').addEventListener('click', findMyPies);
+    document.getElementById('Mary').addEventListener('click', findMyPies);
+    document.getElementById('Luke').addEventListener('click', findMyPies);
+    document.getElementById('John').addEventListener('click', findMyPies);
+    document.getElementById('All').addEventListener('click', findMyPies);
+};
 
-// const johnsPies = () => {
-//     const myPies = [];
-//     for (pie in pies) {
-//         if (pies[pie].instructor === 'John') {
-//             myPies.push(pies[pie]);
-//         }
-//     }
-//     pieBuilder(myPies);
-// };
+const init = () => {
+    pieBuilder(pies);
+    events();
+};
 
+init();
 
-pieBuilder(pies);
-document.getElementById('Zoe').addEventListener('click', findMyPies);
-document.getElementById('Mary').addEventListener('click', findMyPies);
-document.getElementById('Luke').addEventListener('click', findMyPies);
-document.getElementById('John').addEventListener('click', findMyPies);
-document.getElementById('All').addEventListener('click', findMyPies);
