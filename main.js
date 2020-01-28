@@ -149,13 +149,17 @@ const pieBuilder = (monkeyButtArray) => {
 
 const findMyPies = (e) => {
     const buttonId = e.target.id;
-    const myPies = [];
-    for (pie in pies) {
-        if (pies[pie].instructor === buttonId) {
-            myPies.push(pies[pie]);
+    if (buttonId === 'All') {
+        pieBuilder(pies)
+    } else {
+        const myPies = [];
+        for (pie in pies) {
+            if (pies[pie].instructor === buttonId) {
+                myPies.push(pies[pie]);
+            }
         }
+        pieBuilder(myPies);
     }
-    pieBuilder(myPies);
 };
 
 // how we'd do it if we were writing separate functions or each click event 
@@ -176,4 +180,4 @@ document.getElementById('Zoe').addEventListener('click', findMyPies);
 document.getElementById('Mary').addEventListener('click', findMyPies);
 document.getElementById('Luke').addEventListener('click', findMyPies);
 document.getElementById('John').addEventListener('click', findMyPies);
-// document.getElementById('All').addEventListener('click', pieBuilder);
+document.getElementById('All').addEventListener('click', findMyPies);
