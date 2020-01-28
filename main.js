@@ -108,36 +108,36 @@ const printToDom = (divId, textToPrint) => {
 // big images
 // display all pie objects information 
 
-const pieBuilder = () => {
+const pieBuilder = (monkeyButtArray) => {
     let domString = '';
-    for (pie in pies) {
+    for (i in monkeyButtArray) {
         domString += `
         <div class="pie-cards">
             <div class="pie-card-content">
                 <div class="pie-picture">
-                    <img src=${pies[pie].imageURL} alt="A picture of a ${pies[pie].name}">
+                    <img src=${monkeyButtArray[i].imageURL} alt="A picture of a ${monkeyButtArray[i].name}">
                 </div>
                 <div class="pie-card-text">
-                    <h2 class="pie-name">${pies[pie].name}</h2>
+                    <h2 class="pie-name">${monkeyButtArray[i].name}</h2>
                     <div class="pie-lists">
                         <div class="pie-facts-list">
                             <h3 class="pie-facts-header">What you need to know:</h3>
                             <ul>
-                                <li>Price: $${pies[pie].price}</li>
-                                <li>Crust: ${pies[pie].crust}</li>
-                                <li>Is it Organic? ${pies[pie].isOrganic}</li>
-                                <li>Is it Warm? ${pies[pie].isWarm}</li>
+                                <li>Price: $${monkeyButtArray[i].price}</li>
+                                <li>Crust: ${monkeyButtArray[i].crust}</li>
+                                <li>Is it Organic? ${monkeyButtArray[i].isOrganic}</li>
+                                <li>Is it Warm? ${monkeyButtArray[i].isWarm}</li>
                             </ul>
                         </div>
                         <div class="pie-pairings-list">
                             <h3 class="pie-pairings-header">Best served with:</h3>
                             <ul>
-                                <li>${pies[pie].iceCream}</li>
-                                <li>${pies[pie].drinkPairing}</li>
+                                <li>${monkeyButtArray[i].iceCream}</li>
+                                <li>${monkeyButtArray[i].drinkPairing}</li>
                             </ul>
                         </div>
                     </div>
-                    <p class="instructors-pies">This is one of ${pies[pie].instructor}'s favorite pies!</p>
+                    <p class="instructors-pies">This is one of ${monkeyButtArray[i].instructor}'s favorite pies!</p>
                 </div>
             </div>
         </div>
@@ -146,4 +146,34 @@ const pieBuilder = () => {
     printToDom('pie-card-creator', domString);
 };
 
-pieBuilder(pies);
+
+const findMyPies = (e) => {
+    const buttonId = e.target.id;
+    if (buttonId === 'All') {
+        pieBuilder(pies)
+    } else {
+        const myPies = [];
+        for (pie in pies) {
+            if (pies[pie].instructor === buttonId) {
+                myPies.push(pies[pie]);
+            }
+        }
+        pieBuilder(myPies);
+    }
+};
+
+const events = () => {
+    document.getElementById('Zoe').addEventListener('click', findMyPies);
+    document.getElementById('Mary').addEventListener('click', findMyPies);
+    document.getElementById('Luke').addEventListener('click', findMyPies);
+    document.getElementById('John').addEventListener('click', findMyPies);
+    document.getElementById('All').addEventListener('click', findMyPies);
+};
+
+const init = () => {
+    pieBuilder(pies);
+    events();
+};
+
+init();
+
